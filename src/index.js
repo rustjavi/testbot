@@ -1,8 +1,22 @@
 const fs = require('fs');
+const path = require('path');
+const express = require('express');
 const { Client, Collection, Intents } = require('discord.js');
 require('dotenv').config();
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES] });
+
+const app = express();
+const port = 3000;
+app.get('/', (req, res) => {
+  const imagePath = path.join(__dirname, 'index.html');
+  res.sendFile(imagePath);
+});
+app.listen(port, () => {
+  console.log(`🔗 Listening to GlaceYT : http://localhost:${port}`);
+});
+printWatermark();
+
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
