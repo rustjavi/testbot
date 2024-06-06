@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`🔗 Listening to GlaceYT : http://localhost:${port}`);
 });
-printWatermark();
 
 
 // Colección para comandos
