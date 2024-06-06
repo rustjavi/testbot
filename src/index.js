@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -7,24 +7,22 @@ const express = require('express');
 // Crear un nuevo cliente de Discord con las intenciones necesarias
 const client = new Client({ 
     intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_VOICE_STATES,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.MESSAGE_CONTENT
     ]
 });
-
 
 const app = express();
 const port = 3000;
 app.get('/', (req, res) => {
-  const imagePath = path.join(__dirname, 'index.html');
-  res.sendFile(imagePath);
+  const indexPath = path.join(__dirname, 'index.html');
+  res.sendFile(indexPath);
 });
 app.listen(port, () => {
   console.log(`🔗 Listening to GlaceYT : http://localhost:${port}`);
 });
-
 
 // Colección para comandos
 client.commands = new Collection();
